@@ -104,7 +104,7 @@
 					resp.data.elements[i].index = i;
 				}
 				serverData = resp.data;
-				popupHtml = renderElements(resp.data);
+				popupHtml = renderSearch() + renderElements(resp.data);
 			}else{
 				popupHtml = 'No element to display for this page.';
 			}
@@ -117,7 +117,27 @@
 			[].forEach.call(popupContentEl.querySelectorAll('.tx_pagequickadd_element'), function(el){
 				el.addEventListener('click', elementClicked);
 			});
+			popupContentEl.querySelector('input[type="search"]').addEventListener('keyup', searchFieldKeyUp);
+			setTimeout(function(){
+				popupContentEl.querySelector('input[type="search"]').focus();
+			}, 100);
 		}
+	}
+
+	function searchFieldKeyUp(e){
+		var str = e.currentTarget.value;
+		[].forEach.call(popupContentEl.querySelectorAll('.tx_pagequickadd_element__txt'), function(el){
+
+			el.parentNode.style.display = el.innerHTML.toLowerCase().match(str.toLowerCase()) ? '' : 'none';
+
+		});
+	}
+
+	function renderSearch(){
+		return '<div class="tx_pagequickadd_search">'
+		+ '<svg width="20" height="20" viewBox="0 0 416 448"><path d="M288 208q0-46.25-32.875-79.125t-79.125-32.875-79.125 32.875-32.875 79.125 32.875 79.125 79.125 32.875 79.125-32.875 32.875-79.125zM416 416q0 13-9.5 22.5t-22.5 9.5q-13.5 0-22.5-9.5l-85.75-85.5q-44.75 31-99.75 31-35.75 0-68.375-13.875t-56.25-37.5-37.5-56.25-13.875-68.375 13.875-68.375 37.5-56.25 56.25-37.5 68.375-13.875 68.375 13.875 56.25 37.5 37.5 56.25 13.875 68.375q0 55-31 99.75l85.75 85.75q9.25 9.25 9.25 22.5z"></path></svg>'
+		+ '<input type="search" class="tx_pagequickadd_search__field">'
+		+ '</div>';
 	}
 
 	function renderElements(data){

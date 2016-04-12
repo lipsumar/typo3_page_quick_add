@@ -33,5 +33,5 @@ tx_pagequickadd.elements {
 
 ## Bugs
 
-Report bugs to piremmanuel@gmail.com
+Report bugs in [github issues](https://github.com/lipsumar/typo3_page_quick_add/issues)
 

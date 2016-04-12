@@ -19,12 +19,10 @@
 		e.preventDefault();
 
 		dropZoneID = e.currentTarget.parentNode.querySelectorAll('a')[1].rel;
-console.log(e.currentTarget);
 
 		pid = top.DDpid;
 		sys_language_uid = e.currentTarget.getAttribute('data-onclick').match(/sys_language_uid=([0-9]+)/)[1];
 		colPos = e.currentTarget.getAttribute('data-onclick').match(/colPos=([0-9]+)/)[1];
-console.log('pid', pid, 'sys_language_uid', sys_language_uid, 'colPos', colPos);
 
 		openOverlay();
 	}
@@ -140,7 +138,7 @@ console.log('pid', pid, 'sys_language_uid', sys_language_uid, 'colPos', colPos);
 	function renderElementGroup(elements){
 		var html = '';
 		for (var i = 0; i < elements.length; i++) {
-			html+='<div class="tx_pagequickadd_element" data-index="'+elements[i].index+'"><img src="../../../'+elements[i].icon+'" class="tx_pagequickadd_element__img"><span class="tx_pagequickadd_element__txt">'+elements[i].title+'</span></div>';
+			html+='<div class="tx_pagequickadd_element" data-index="'+elements[i].index+'">'+(elements[i].icon ? '<img src="../../../'+elements[i].icon+'" class="tx_pagequickadd_element__img">' : '')+'<span class="tx_pagequickadd_element__txt">'+elements[i].title+'</span></div>';
 		}
 		return html;
 	}
@@ -164,19 +162,6 @@ console.log('pid', pid, 'sys_language_uid', sys_language_uid, 'colPos', colPos);
 			newContentEl.addEventListener('click', newContentElClicked);
 		});
 	}
-/*
-	function addButtons(){
-		var targetEls = document.querySelectorAll('.t3-page-ce-wrapper-new-ce');
-		[].forEach.call(targetEls, addButton);
-	}
-
-	function addButton(targetEl){
-		var btnEl = document.createElement('a');
-		btnEl.innerHTML = '<span class="t3-icon t3-icon-extensions t3-icon-extensions-page_quick_add t3-icon-extensions-page_quick_add-add">+</span>';
-		btnEl.addEventListener('click', buttonClicked);
-		targetEl.appendChild(btnEl);
-	}
-*/
 
 
 

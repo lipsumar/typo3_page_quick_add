@@ -18,7 +18,7 @@ class PageRenderer {
 	public function addJSCSS($parameters, &$pageRenderer) {
 		$TSconfig = BackendUtility::getPagesTSconfig(intval(GeneralUtility::_GP('id')));
 
-		if ($GLOBALS['MCONF']['name'] === 'web_layout' && $TSconfig && $TSconfig['tx_pagequickadd.'] && $TSconfig['tx_pagequickadd.']['elements.']) {
+		if ($GLOBALS['MCONF']['name'] === 'web_layout') {
 			$pageRenderer->addJsFile($GLOBALS['BACK_PATH'] . ExtensionManagementUtility::extRelPath('page_quick_add') . 'Resources/Public/Backend/main.js');
 			$pageRenderer->addCssFile($GLOBALS['BACK_PATH'] . ExtensionManagementUtility::extRelPath('page_quick_add') . 'Resources/Public/Backend/style.css');
 		}

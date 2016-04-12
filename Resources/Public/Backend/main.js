@@ -100,11 +100,11 @@
 		var popupHtml = '';
 		if(resp && resp.data){
 			if(resp.data.elements){
-				for (var i = 0; i < resp.data.elements.length; i++) {
+				/*for (var i = 0; i < resp.data.elements.length; i++) {
 					resp.data.elements[i].index = i;
-				}
+				}*/
 				serverData = resp.data;
-				popupHtml = renderSearch() + renderElements(resp.data);
+				popupHtml = renderSearch() + renderGrid() + renderElements(resp.data);
 			}else{
 				popupHtml = 'No element to display for this page.';
 			}
@@ -114,7 +114,7 @@
 
 		if(popupContentEl){
 			popupContentEl.innerHTML = popupHtml;
-			[].forEach.call(popupContentEl.querySelectorAll('.tx_pagequickadd_element'), function(el){
+			[].forEach.call(popupContentEl.querySelectorAll('.tx_pagequickadd_element-js-target'), function(el){
 				el.addEventListener('click', elementClicked);
 			});
 			popupContentEl.querySelector('input[type="search"]').addEventListener('keyup', searchFieldKeyUp);
@@ -140,6 +140,30 @@
 		+ '</div>';
 	}
 
+	function renderGrid(){
+		var html = '';
+		if(serverData.gridElementsIndex && serverData.gridElementsIndex.length){
+			html+='<div class="tx_pagequickadd_element-group">';
+			html+='<div class="tx_pagequickadd_element-group__title">Grid</div>';
+			html+='<div class="tx_pagequickadd_element-group__body">';
+			var element;
+			for (var i = 0; i < serverData.gridElementsIndex.length; i++) {
+				element = serverData.elements[serverData.gridElementsIndex[i]];
+				html+='<div class="tx_pagequickadd_element-grid tx_pagequickadd_element-js-target" data-index="'+element.index+'">'+element.title;
+				if(element._children){
+					html+='<div class="tx_pagequickadd_element-grid__children">';
+					element._children.forEach(function(child){
+						html+='<div class="tx_pagequickadd_element-grid__child tx_pagequickadd_element-js-target" data-index="'+child.index+'">'+child.title+'</div>';
+					});
+					html+='</div>';
+				}
+				html+='</div>';
+			}
+			html+='</div></div>';
+		}
+		return html;
+	}
+
 	function renderElements(data){
 		var html = '';
 		var elementsByTab = getElementsByTab(data);
@@ -158,7 +182,7 @@
 	function renderElementGroup(elements){
 		var html = '';
 		for (var i = 0; i < elements.length; i++) {
-			html+='<div class="tx_pagequickadd_element" data-index="'+elements[i].index+'">'+(elements[i].icon ? '<img src="../../../'+elements[i].icon+'" class="tx_pagequickadd_element__img">' : '')+'<span class="tx_pagequickadd_element__txt">'+elements[i].title+'</span></div>';
+			html+='<div class="tx_pagequickadd_element tx_pagequickadd_element-js-target" data-index="'+elements[i].index+'">'+(elements[i].icon ? '<img src="../../../'+elements[i].icon+'" class="tx_pagequickadd_element__img">' : '')+'<span class="tx_pagequickadd_element__txt">'+elements[i].title+'</span></div>';
 		}
 		return html;
 	}

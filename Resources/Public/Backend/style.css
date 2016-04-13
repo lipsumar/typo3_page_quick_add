@@ -119,11 +119,21 @@
 	text-align: center;
 
 	display:flex;
-	justify-content:center;
+	justify-content:flex-start;
 	align-items:center;
 	flex-direction:column;
+	box-sizing:border-box;
 
 	cursor: pointer;
+	padding-top: 10px;
+}
+.tx_pagequickadd_element__img{
+	width:48px;
+}
+.tx_pagequickadd_element__txt{
+	display:block;
+	line-height: 1.2;
+	padding-top: 6px;
 }
 .tx_pagequickadd_element:hover{
 	background-color: #CFD8DC;

@@ -7,7 +7,7 @@
 	var dropZoneID;
 
 	// needed to link to new content
-	var pid, sys_language_uid, colPos;
+	var pid, sys_language_uid, colPos, gridelement_container, gridelement_columns, uid_pid;
 
 	var serverData;
 
@@ -21,8 +21,25 @@
 		dropZoneID = e.currentTarget.parentNode.querySelectorAll('a')[1].rel;
 
 		pid = top.DDpid;
-		sys_language_uid = e.currentTarget.getAttribute('data-onclick').match(/sys_language_uid=([0-9]+)/)[1];
-		colPos = e.currentTarget.getAttribute('data-onclick').match(/colPos=([0-9]+)/)[1];
+		sys_language_uid = e.currentTarget.getAttribute('data-onclick').match(/sys_language_uid=([0-9]*)/)[1];
+
+		colPos = null;
+		gridelement_container = null;
+		gridelement_columns = null;
+		uid_pid = null;
+		var colPosMatches = e.currentTarget.getAttribute('data-onclick').match(/colPos=([0-9]+)/);
+		if(colPosMatches){
+			colPos = colPosMatches[1];
+		}else{
+			var gridelement_container_matches = e.currentTarget.getAttribute('data-onclick').match(/tx_gridelements_container=([0-9]+)/);
+			if(gridelement_container_matches){
+				gridelement_container = gridelement_container_matches[1];
+				gridelement_columns = e.currentTarget.getAttribute('data-onclick').match(/tx_gridelements_columns=([0-9]+)/)[1];
+			}else{
+				uid_pid = e.currentTarget.getAttribute('data-onclick').match(/uid_pid=(-?[0-9]+)/)[1];
+			}
+		}
+
 
 		openOverlay();
 	}
@@ -198,7 +215,7 @@
 	}
 
 	function addEvents(){
-		var newContentEls = document.querySelectorAll('.t3-page-ce-wrapper-new-ce a:first-child');
+		var newContentEls = document.querySelectorAll('.t3-page-ce-wrapper-new-ce a:first-child, .t3-page-ce-new-ce a:first-child');
 		[].forEach.call(newContentEls, function(newContentEl){
 			newContentEl.setAttribute('data-onclick', newContentEl.onclick);
 			newContentEl.onclick = '';
@@ -234,7 +251,16 @@
 
 	function goToalt_doc(appendGet) {
 		appendGet = appendGet || '';
-		window.location.href = '../../../alt_doc.php?edit[tt_content]['+pid+']=new&defVals[tt_content][colPos]='+colPos+'&defVals[tt_content][sys_language_uid]='+sys_language_uid+'&returnUrl=%2Ftypo3%2Fsysext%2Fcms%2Flayout%2Fdb_layout.php%3Fid%3D'+pid+'%26&'+appendGet;
+		if(colPos){
+			// new element in native colPos
+			window.location.href = '../../../alt_doc.php?edit[tt_content]['+pid+']=new&defVals[tt_content][colPos]='+colPos+'&defVals[tt_content][sys_language_uid]='+sys_language_uid+'&returnUrl=%2Ftypo3%2Fsysext%2Fcms%2Flayout%2Fdb_layout.php%3Fid%3D'+pid+'%26&'+appendGet;
+		}else if(gridelement_container){
+			// new element in gridelement
+			window.location.href = '../../../alt_doc.php?edit[tt_content]['+pid+']=new&defVals[tt_content][colPos]=-1&defVals[tt_content][sys_language_uid]='+sys_language_uid+'&defVals[tt_content][tx_gridelements_container]='+gridelement_container+'&defVals[tt_content][tx_gridelements_columns]='+gridelement_columns+'&returnUrl=%2Ftypo3%2Fsysext%2Fcms%2Flayout%2Fdb_layout.php%3Fid%3D'+pid+'%26&'+appendGet;
+		}else{
+			window.location.href = '../../../alt_doc.php?edit[tt_content]['+uid_pid+']=new&defVals[tt_content][colPos]=-1&defVals[tt_content][sys_language_uid]='+sys_language_uid+'&returnUrl=%2Ftypo3%2Fsysext%2Fcms%2Flayout%2Fdb_layout.php%3Fid%3D'+pid+'%26&'+appendGet;
+		}
+
 	}
 
 

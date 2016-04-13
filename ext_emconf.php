@@ -5,7 +5,7 @@ $EM_CONF[$_EXTKEY] = array (
 	'description' => '',
 	'category' => 'be',
 	'shy' => false,
-	'version' => '1.1.0',
+	'version' => '1.1.1',
 	'priority' => 'bottom',
 	'loadOrder' => '',
 	'module' => '',
@@ -24,7 +24,7 @@ $EM_CONF[$_EXTKEY] = array (
 	array (
 		'depends' =>
 		array (
-			'typo3' => '6.2.0-0.0.0',
+			'typo3' => '6.2.0-6.2.99',
 			'gridelements' => '3.3.4'
 		),
 		'conflicts' =>

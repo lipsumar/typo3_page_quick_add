@@ -2,7 +2,7 @@
 
 $EM_CONF[$_EXTKEY] = array (
 	'title' => 'Page quick add',
-	'description' => '',
+	'description' => 'An alternative for the native New Content Wizard',
 	'category' => 'be',
 	'shy' => false,
 	'version' => '1.1.1',

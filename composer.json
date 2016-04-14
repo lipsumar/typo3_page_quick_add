@@ -16,7 +16,7 @@
     }
   },
   "replace": {
-    "page-quick-add": "page_quick_add",
+    "page_quick_add": "self.version",
     "typo3-ter/page-quick-add": "self.version"
   },
   "require": {

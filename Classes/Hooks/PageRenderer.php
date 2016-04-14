@@ -1,5 +1,5 @@
 <?php
-namespace PageQuickAdd\Hooks;
+namespace Lipsumar\PageQuickAdd\Hooks;
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;

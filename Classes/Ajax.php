@@ -1,5 +1,5 @@
 <?php
-namespace PageQuickAdd;
+namespace Lipsumar\PageQuickAdd;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;

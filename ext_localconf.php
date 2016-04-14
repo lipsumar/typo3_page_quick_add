@@ -5,4 +5,4 @@ if (!defined('TYPO3_MODE')) {
 }
 
 $TYPO3_CONF_VARS['BE']['AJAX']['tx_pagequickadd::ajax::main'] =
-	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Ajax.php:PageQuickAdd\\Ajax->main';
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Ajax.php:Lipsumar\\PageQuickAdd\\Ajax->main';

@@ -21,7 +21,7 @@ All config is done in page TSconfig.
 tx_pagequickadd.tabs = common, plugins, foo
 ```
 
-### Define existing elements to paste
+### Define existing elements
 
 ```typoscript
 tx_pagequickadd.elements {
@@ -37,7 +37,7 @@ tx_pagequickadd.elements {
 	}
 }
 ```
-
+With this configuration, you can reference existing CEs (tt_content). The CEs you configure will appear in the popup. A simple click on them will directly copy them to the page.
 
 ### Define special grid tab
 

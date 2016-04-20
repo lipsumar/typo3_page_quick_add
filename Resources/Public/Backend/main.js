@@ -207,8 +207,7 @@
 		var newContentEls = document.querySelectorAll('.t3-page-ce-wrapper-new-ce a:first-child, .t3-page-ce-new-ce a:first-child');
 		[].forEach.call(newContentEls, function(newContentEl){
 			newContentEl.setAttribute('data-onclick', newContentEl.getAttribute('onclick'));
-			newContentEl.onclick = '';
-			newContentEl.setAttribute('onclick', '');
+			newContentEl.onclick = ''; // remove property "onclick" to disable js "on click" but **keep onclick attribute** as it is apparently needed by the core...
 			newContentEl.addEventListener('click', newContentElClicked);
 		});
 	}
